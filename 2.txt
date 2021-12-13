@@ -1,0 +1,77 @@
+Kocael ̇I ̈Un ̇Ivers ̇Ites ̇IB ̇Ilg ̇Isayar M ̈uhend ̇Isl ̇I ̆g ̇I
+Yazılım Lab.I
+2021-2022 G ̈uz, Proje III
+Web Uygulaması
+Proje Ba ̧slangı ̧c Tarihi  . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 29 Kasım 2021
+Proje Biti ̧s Tarihi  . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 21 Aralık 2021
+Sunum Tarihleri  . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 22-23 Aralık 2021
+1    Projenin ̇I ̧ceri ̆gi
+Bir  b ̈ol ̈umde  yapılan  projelerin  sisteme  y ̈uklenebildi ̆gi  ve  bu  dok ̈umanlarının  temel  bilgi-
+lerinin  ̧cıkarılıp sorgulanabildi ̆gi bir web uygulaması ger ̧cekle ̧stirmeniz beklenmektedir.
+Web sitesinde y ̈onetim ve kullanıcı paneli bulunmalıdır.
+Y ̈onetim paneli aracılı ̆gıyla yeni kullanıcı ekleme, silme ve g ̈uncelleme i ̧slemleri yapılabilmelidir.
+Kullanıcıların sisteme pdf y ̈ukleyebilece ̆gi bir alan bulunmalıdır.  Bu alanda projeyi teslim
+eden  ̈o ̆grencilerin pdf’leri y ̈uklenecektir.  Bu pdf’ler i ̧cin kullanılacak algoritma ile a ̧sa ̆gıdaki
+bilgilerin otomatik olarak elde edilmesi gerekmektedir:
+•Yazar bilgileri (ad, soyad,  ̈o ̆grenci numarası,  ̈o ̆gretim t ̈ur ̈u)
+•Ders adı (ara ̧stırma problemleri veya bitirme projesi)
+•Proje  ̈ozeti
+•Projenin teslim edildi ̆gi d ̈onem ( ̈Orn.  2020-2021 G ̈uz)
+1
+----------------Page (0) Break----------------
+•Proje ba ̧slı ̆gı
+•Anahtar kelimeler
+•Danı ̧sman bilgileri (ad, soyad, unvan)
+•J ̈uri bilgileri (ad, soyad, unvan)
+Elde edilen bilgiler ve pdf dok ̈umanı ili ̧skisel bir veritabanına kaydedilerek sorgulanabilme-
+lidir.
+Y ̈onetim paneli aracılı ̆gıyla kullanıcıların y ̈ukledi ̆gi pdf’lere ve bu dok ̈umanlardan elde edilen
+bilgilere, eri ̧sim sa ̆glanabilmelidir.  Y ̈onetim kısmında kullanıcı bilgileri, dersin adı ve d ̈onem
+bilgilerine eri ̧sim sa ̆glanabilmelidir.
+A ̧sa ̆gıdaki sorgular ger ̧cekle ̧stirilmelidir:
+•Sorgu  1:   Elde  edilen  bilgilerden  yazara,  derse,  proje  adına,  anahtar  kelimelere  ve
+d ̈oneme g ̈ore ayrı ayrı sorgular
+•Sorgu 2: Belirli d ̈onemde bir kullanıcının bir derste y ̈ukledi ̆gi projeler ( ̈Orn.  2018-2019
+Bahar d ̈onemi A. A. kullanıcısının Bitirme dersi i ̧cin y ̈ukledi ̆gi projeler)
+2 ̈Onemli Bilgiler
+Proje web uygulaması olmak zorundadır.  Web sitesi kullanıcı dostu olmalıdır.
+Uygulama T ̈urk ̧ce i ̧cerikli pdf’ler i ̧cin ger ̧cekle ̧stirilmelidir.
+Yukarıda  belirtilen  pdf’ten  elde  edilecek  bilgiler  metin  i ̧sleme  yoluyla  (pdf   ̈uzerinden)
+otomatik ger ̧cekle ̧stirilmelidir.
+Kullanıcılar sadece kendi y ̈ukledi ̆gi projelere eri ̧sim sa ̆glayabilirken,  y ̈onetim panelinde
+t ̈um projelere eri ̧sim sa ̆glanabilmelidir.
+Kullanıcı ve y ̈onetim kısmında t ̈um sorgular eri ̧sim izninin bulundu ̆gu dok ̈umanlar i ̧cin
+yapılabilmelidir.
+2
+----------------Page (1) Break----------------
+3    Proje Teslimi ve Notlandırma
+Rapor IEEE formatında 4 sayfa, akı ̧s diyagramı veya yalancı kod i ̧ceren,  ̈ozet, giri ̧s, y ̈ontem,
+deneysel sonu ̧clar, sonu ̧c ve kaynak ̧ca b ̈ol ̈um ̈unden olu ̧smalıdır. Raporda AKIS ̧ D ̇IYAGRAMI
+olmalıdır.
+Proje  ile  ilgili  sorular  edestek.kocaeli.edu.tr  sitesindeki  forum   ̈uzerinden  Ar ̧s.   G ̈or.   Ab-
+durrahman G ̈un veya Ar ̧s.  G ̈or.  Furkan G ̈oz’e sorulabilir.
+Demo tarihleri daha sonra duyurulacaktır.
+Demo sırasında algoritma,  geli ̧stirdi ̆giniz kodun  ̧ce ̧sitli kısımlarının ne ama ̧cla yazıldı ̆gı ve
+geli ̧stirme ortamı hakkında sorular sorulabilir.
+Kullandı ̆gınız herhangi bir satır kodu a ̧cıklamanız istenebilir.
+Proje  tanıtım  toplantısı  3  Aralık  Cuma  g ̈un ̈u  saat  15.00’da  online  olarak  yapılacaktır.
+Toplantı linki sadece e-destek  ̈uzerinden duyurulacaktır.
+Proje grupları her  ̈o ̆gretim kendi i ̧cinde olmak  ̈uzere en fazla iki ki ̧siden olu ̧sturulmalıdır.
+Notlandırma
+Yorum:    A ̧sa ̆gıdaki   notlandırma   bilgisi   projeyi   yaparken   planlama   yapabilmeniz
+a ̧cısından payla ̧sılmı ̧stır.  Bir puanlama kriterinden sunum de ̆gerlendirmesine g ̈ore tam
+puan  alınabilece ̆gi  gibi  eksik  puan  da  alınabilir.   Sunumda  sorulara  verilen  cevaplar,
+kod hakimiyeti ve puanlama kriterlerinde yer almayan dok ̈umanda belirtilen madddeler
+kriterler i ̧cerisinde ayrıca de ̆gerlendirilecektir.
+Pdf’ten bilgi  ̧cıkarma i ̧sleminde metin i ̧slemenin yanında ilave olarak g ̈or ̈unt ̈u  ̧cıkarma
+y ̈ontemleri ile  ̧c ̈oz ̈um  ̈uretilirse bonus de ̆gerlendirmesi yapılacaktır.
+Do ̆gru   de ̆gerlendirme   yapabilmek   i ̧cin   sorguların   do ̆grulu ̆gunu   g ̈osterebilmeniz
+gerekmektedir.
+Bilgi  ̧cıkarma  . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 30
+Sorgu 1  . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 20
+Sorgu 2  . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 15
+Kayıt i ̧slemleri ve di ̆ger isterler (kullanıcı dostu vs.)   . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 20
+Rapor ( ̇IC ̧ ER ̇IK, akı ̧s diyagramı, kazanımlar, yorumlar)  . . . . . . . . . . . . . . . . . . . . . . . . . . . 15
+Toplam:100
+3
+----------------Page (2) Break----------------
