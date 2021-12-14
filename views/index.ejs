@@ -15,19 +15,25 @@
     <link rel="stylesheet" type="text/css" href="slick/slick-theme.css" />
     <link rel="stylesheet" href="css/tooplate-style.css">
 </head>
-
+    
 <body>
-    <form class="login-form" id="form_submit" >
+    <% if(alert_flag == true) { %>
+        <script>
+            alert("Email ve Şifre Uyuşmuyor !!!")
+        </script>
+        
+    <% } %>
+    <form class="login-form" id="form_submit" method="post" action="/loginCheck">
         <p class="login-text">
             <span class="fa-stack fa-lg">
                 <i class="fa fa-circle fa-stack-2x"></i>
                 <i class="fa fa-lock fa-stack-1x"></i>
             </span>
         </p>
-        <input type="email" class="login-username" autofocus="true" required="true" placeholder="Email"
+        <input type="email" name="email" class="login-username" autofocus="true" required="true" placeholder="Email"
             id="email_text" />
-        <input type="password" class="login-password" required="true" placeholder="Password" id="password_text" />
-        <input type="submit" name="Login" value="Login" class="login-submit" />
+        <input type="password" name="password" class="login-password" required="true" placeholder="Password" id="password_text" />
+        <input type="submit" value="Login" class="login-submit" />
     </form>
     <div class="underlay-photo"></div>
     <div class="underlay-black"></div>

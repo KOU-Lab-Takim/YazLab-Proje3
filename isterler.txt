@@ -2,7 +2,7 @@
 - Pdf'ler bilgisayara yüklenecek ve istenildiğinde indirilebilecek
 - Pdf'lerden bilgi çıkarma işlemi yapılacak ++++
 - Admin ve Kullanıcı panelleri oluşturulacak
-- Admin panelinde yeni kullanıcı ekleme, silme, güncelleme işlemleri yapılabilecek
+- Admin panelinde yeni kullanıcı ekleme, silme, güncelleme işlemleri yapılabilecek ++++
 - Çıkarılacak Bilgiler : ++++ 
 	* Ad, Soyad, Öğrenci Numarası, Öğretim Türü
 	* Ders Adı
