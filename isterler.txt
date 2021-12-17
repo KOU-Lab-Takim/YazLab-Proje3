@@ -1,7 +1,7 @@
 
 - Pdf'ler bilgisayara yüklenecek ve istenildiğinde indirilebilecek
 - Pdf'lerden bilgi çıkarma işlemi yapılacak ++++
-- Admin ve Kullanıcı panelleri oluşturulacak
+- Admin ve Kullanıcı panelleri oluşturulacak +++
 - Admin panelinde yeni kullanıcı ekleme, silme, güncelleme işlemleri yapılabilecek ++++
 - Çıkarılacak Bilgiler : ++++ 
 	* Ad, Soyad, Öğrenci Numarası, Öğretim Türü
@@ -12,7 +12,7 @@
 	* Anahtar Kelime
 	* Danışman Bilgileri
 	* Jüri Bilgileri
-- Pdf'ten çıkarılan bilgiler veritabanında saklanılacak
+- Pdf'ten çıkarılan bilgiler veritabanında saklanılacak ++++
 - Sorgu 1: Elde edilen bilgilerden yazara, derse, proje adına, anahtar kelimelere ve
 	döneme göre ayrı ayrı sorgular
 - Sorgu 2: Belirli d¨onemde bir kullanıcının bir derste y¨ukledi˘gi projeler (Orn. 2018-2019 ¨

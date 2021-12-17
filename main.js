@@ -1,15 +1,14 @@
 var express = require('express');  
 var app = express();    
-
 const fileUpload = require("express-fileupload")
 const methodOverride = require('method-override')
 const fs = require("fs")
 const mongoose = require('mongoose');
-
 let PDFParser = require("pdf2json");
 let XMLHttpRequest = require('xhr2');
 const pdfParser = new PDFParser(this, 1);
 
+// giriş yapan kullanıcın database deki ID si
 let LOGIN_ID = ""
 
 // ejs settings
@@ -20,8 +19,8 @@ app.set("view engine", "ejs")
 let MongoClient = require('mongodb').MongoClient;
 const { restart } = require('nodemon');
 const ObjectIdd =  require("mongodb").ObjectId
-let url = "mongodb+srv://admin:admin@cluster0.suejd.mongodb.net/proje3?retryWrites=true&w=majority"
-
+let url2 = "mongodb+srv://admin:admin@cluster0.suejd.mongodb.net/proje3?retryWrites=true&w=majority"
+let url = "mongodb://localhost:27017/proje3?readPreference=primary&appname=MongoDB%20Compass&directConnection=true&ssl=false"
 const {db_user, db_pdf_file} = require("./schemas")
 
 let {extract_info_from_pdf} = require("./pdf_extraction")
@@ -36,7 +35,9 @@ app.use(methodOverride('_method', {
   methods: ["POST", "GET"]
 }))
 
+// Giriş Sayfası
 app.get('/', async function (req, res) {  
+    // Database ilk bağlantı yapılmasını bekle
     await mongoose.connect(url);
     
     res.render("index", {
@@ -44,6 +45,8 @@ app.get('/', async function (req, res) {
     });  
 });
 
+// Giriş bilgilerinin database de olup olmadığını kontrol et ve giriş
+// yapan kullanıcınıyı yetkisine göre yönlendir.
 app.post('/loginCheck', async (req, res) => {
   let a  = await db_user.find({"email" : req.body.email , "password" : req.body.password})
   console.log(a)
@@ -63,6 +66,7 @@ app.post('/loginCheck', async (req, res) => {
   
 })
 
+// Admin panelinde kullanıcı ekle
 app.post("/add_user_post", async (req, res) => {
   await db_user.create({
     email : req.body.email,
@@ -72,12 +76,15 @@ app.post("/add_user_post", async (req, res) => {
   res.render("admin_pannel")
 })
 
+// Admin panelinde kullanıcı sil
 app.get("/delete_user", async (req,res) => {
   res.render("delete_user", {
     alert_flag : false
   })
 })
 
+
+// Admin panelinde kullanıcı güncelle
 app.get("/edit_user", async (req,res) => {
   res.render("edit_user", {
     alert_flag : false
@@ -85,6 +92,7 @@ app.get("/edit_user", async (req,res) => {
 })
 
 
+// Güncellemek istenen kullanıcı bilgilerinin veritabanında olup olmadığını kontrol et
 app.post("/edit_user_post", async (req, res) => {
   let a  = await db_user.find({"email" : req.body.email})
   if(a.length == 0){
@@ -100,6 +108,7 @@ app.post("/edit_user_post", async (req, res) => {
   }
 })
 
+// Yeni girilen bilgilere göre kullanıcıyı güncelle.
 app.post("/edit_user_post_2" , async (req, res) => {
   db_user.create({
     email : req.body.email,
@@ -109,6 +118,7 @@ app.post("/edit_user_post_2" , async (req, res) => {
   res.render("admin_pannel")
 })
 
+// Silinmek istenen kullanıcının veritabanında olup olmadığını kontrol et
 app.post("/delete_user_post", async (req, res) => {
   let a  = await db_user.find({"email" : req.body.email})
   if(a.length == 0){
@@ -131,29 +141,34 @@ app.get("/file_upload", (req,res) => {
   res.render("file_upload")
 })
 
+// Pdf ten çıkarılan bilgileri veritabanına kaydet
 app.post("/file_upload_post_2", async(req,res) => {
   console.log(req.body)
   await db_pdf_file.create({
     user_id : LOGIN_ID,
-    path : req.body.path,
-    student_name : req.body.student_name,
-    student_number : req.body.student_number,
-    term : req.body.term,
-    lesson : req.body.lesson,
-    abstract : String(req.body.abstract),
-    date : req.body.date,
-    keywords : req.body.keywords,
-    advisor : req.body.advisor,
-    jury1 : req.body.jury1,
-    jury2 : req.body.jury2,
-    department : req.body.department
+    path : String(req.body.path).trim().toUpperCase(),
+    student_name : req.body.student_name.trim().toUpperCase(),
+    student_number : req.body.student_number.trim().toUpperCase(),
+    term : req.body.term.trim().toUpperCase(),
+    lesson : req.body.lesson.trim().toUpperCase(),
+    abstract : String(req.body.abstract).trim().toUpperCase(),
+    date : req.body.date.trim().toUpperCase(),
+    keywords : req.body.keywords.trim().toUpperCase(),
+    advisor : req.body.advisor.trim().toUpperCase(),
+    jury1 : req.body.jury1.trim().toUpperCase(),
+    jury2 : req.body.jury2.trim().toUpperCase(),
+    department : req.body.department.trim().toUpperCase(),
+    project_name : req.body.project_name.trim().toUpperCase()
   })
   res.render("user_panel")
 })
 
+// Verilen pdf teki bilgileri çıkar ve onaylama sayfasına yönlendir.
 app.post("/file_upload_post", async (req,res) => {
   let pdf = req.files.pdf
-  let dir = __dirname + "/public/pdf_files/" + pdf.name 
+  let dir = __dirname + "/public/pdf_files/" + pdf.name
+
+  // pdf i public/pdf_files içine kaydet
   pdf.mv(dir, async function(err){
     
     
@@ -167,6 +182,7 @@ app.post("/file_upload_post", async (req,res) => {
 
     pdfParser.loadPDF(filename + ".pdf");
 
+    // Belirli bir sayfa aralığını string olarak döndür.
     function readPage(arrayOfLines, pageNum1, pageNum2) {
         let find = "----------------Page (" + String(pageNum1) + ") Break----------------"
         let find2 = "----------------Page (" + String(pageNum2) + ") Break----------------"
@@ -187,6 +203,7 @@ app.post("/file_upload_post", async (req,res) => {
         return pageText
     }
 
+    // String içerisinde belirli bir kalıbı ara
     function searchPattern(line, pattern) {
         if (line.split("").splice(0, pattern.length).join("") == pattern) {
             return [true, line.split("").splice(pattern.length).join("")]
@@ -207,11 +224,12 @@ app.post("/file_upload_post", async (req,res) => {
 
         promise.then(message => {
             let arrayOfLines = textData.split("\n");
+            // Satırlardaki gereksiz boşlukları sil.
             for (let i = 0; i < arrayOfLines.length; i++) {
                 arrayOfLines[i] = arrayOfLines[i].slice(0, -1)
             }
 
-            // 4.sayfada isim ve öğrenci no bulduk
+            // 4.sayfadan isim ve öğrenci no bilgileri çıkarıldı
             let text = readPage(arrayOfLines, 2, 3)
             let ogrenciNo
             let isim
@@ -235,7 +253,8 @@ app.post("/file_upload_post", async (req,res) => {
             infos["student_name"] = isim
             infos["term"] = ogretimTuru
 
-            // 2.sayfada isim ve öğrenci no bulduk
+            // 2.sayfadan bölüm, tez ismi, danışman ismi,
+            // Jüri isimleri ve tarih bilgileri çıkarıldı
             text = readPage(arrayOfLines, 0, 1)
             let bolum
             let tez_ismi
@@ -244,6 +263,7 @@ app.post("/file_upload_post", async (req,res) => {
             let tarih
 
             bolum = text[3]
+            let lesson = text[6]
             tez_ismi = text[8]
             if (text[9][0] != ' ') {
                 tez_ismi += text[9]
@@ -253,13 +273,15 @@ app.post("/file_upload_post", async (req,res) => {
             juri2 = text[17]
             tarih = text[20].split("").splice(24).join("")
             infos["department"] = bolum
-            infos["lesson"] = tez_ismi
+            infos["project_name"] = tez_ismi
             infos["advisor"] = danisman_isim
             infos["jury1"] = juri1
             infos["jury2"] = juri2
-            infos["date"] = tarih
+            infos["date"] = tarih.split("").splice(0, 11).join("")
+            infos["term"] = tarih.split("").splice(14).join("")
+            infos["lesson"] = lesson
 
-            // 10.sayfada ozet ve anahtar kelimeleri bulduk
+            // 10.sayfadan özet bilgileri ve anahtar kelimeler çıkarıldı.
             text = readPage(arrayOfLines, 8, 9)
             let abstract = []
             let keywords
@@ -286,7 +308,121 @@ app.post("/file_upload_post", async (req,res) => {
 
 })
 
-var server = app.listen(3000, function () {  
+async function checkUserType(){
+  let a = await db_user.findOne({_id : LOGIN_ID})
+  return a.type
+}
+
+// pdf arama ekranı
+app.get("/search_pdf_admin", async (req,res) => {
+  res.render("search_pdf_admin", {
+    results : {},
+    type : "admin"
+  })
+  
+})
+
+app.get("/search_pdf_user", async (req,res) => {
+  res.render("search_pdf_user", {
+    results : {},
+    type : "user"
+  })
+  
+})
+
+// verilen body nesnesinin bos olup olmadığını kontrol et ve filtreye ekle
+function controlBody(body, key,filter){
+  if(body != ""){
+    filter[key] = body
+  }
+  return filter
+}
+
+function controlCharacters(str){
+  let a = str.split("")
+  for(let i=0; i<a.length; i++){
+    if(a[i] == "i")
+      a[i] = "İ"
+  }
+  return a.join("")
+}
+
+function checkKeyword(given, control){
+  for(let i=0; i<given.length; i++){
+    for(let j=0; j<control.length; j++){
+      if(given[i] == control[j])
+        return true
+    }
+  }
+  return false
+}
+
+app.post("/search_pdf_post", async (req,res) => {
+  filter = {}
+
+  if(req.body.type  == "admin")
+    filter = controlBody(controlCharacters(req.body.author).trim().toUpperCase(), "student_name", filter)
+  filter = controlBody(controlCharacters(req.body.lesson).trim().toUpperCase(), "lesson", filter)
+  filter = controlBody(controlCharacters(req.body.project_name).trim().toUpperCase(), "project_name", filter)
+  filter = controlBody(controlCharacters(req.body.term).trim().toUpperCase(), "term", filter)
+  
+  if(req.body.type == "admin"){
+    // Kullanıcı kontrol işlemleri
+    if(req.body.user_email != ""){
+      let a = await db_user.findOne({email : req.body.user_email})
+      console.log(a)
+      if(a){
+        filter["user_id"] = String(a._id)
+      }
+      else{
+        filter["user_id"] = "-1"
+      }
+    }
+  }
+  else{
+    filter["user_id"] = LOGIN_ID
+  }
+  
+
+  let results = await db_pdf_file.find(filter)
+  
+  // Anahtar kelime kontrol işlemleri
+  if(req.body.keywords != ""){
+    
+    let given_keywords = controlCharacters(req.body.keywords).trim().toUpperCase().split(",")
+    for(let i=0; i<results.length; i++){
+      let control_keywords = results[i].keywords.split(",")
+      for(let j=0; j<control_keywords.length; j++){
+        control_keywords[j] = control_keywords[j].trim()
+      }
+      console.log(given_keywords)
+      console.log(control_keywords)
+      if(checkKeyword(given_keywords, control_keywords)){
+  
+      }else{
+        results.splice(i, 1)
+        i -= 1
+      }
+    }
+  }
+
+  if(req.body.type == "user"){
+    res.render("search_pdf_user", {
+      results : results,
+      type : req.body.type
+    })
+  }
+  else{
+    res.render("search_pdf_admin", {
+      results: results,
+      type : req.body.type
+    })
+  }
+
+  
+})
+
+var server = app.listen(4000, function () {  
   var host = server.address().address;  
   var port = server.address().port;  
   console.log('Example app listening at http://%s:%s', host, port);  

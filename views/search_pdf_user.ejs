@@ -27,19 +27,32 @@
 
 
 				<div class="span9">
-					<form method="post" action="/add_user_post">
-						Eklemek İstediğiniz Kullanıcının Bilgilerini Girin <br>
-						<input type="email" name="email" class="login-username" autofocus="true" required="true"
-							placeholder="Email" id="email_text" />
+					<form method="post" action="/search_pdf_post">
+						Ders : <input type="text" name="lesson" class="login-username" autofocus="true"
+							placeholder=""  />
 						<br>
-						<input type="password" name="password" class="login-password" required="true"
-							placeholder="Password" id="password_text" />
+						Proje Adı : <input type="text" name="project_name" class="login-username" autofocus="true"
+							placeholder=""  />
 						<br>
-						<input type="text" name="user_type" class="login-username" required="true"
-							placeholder="User Type" />
+						Anahtar Kelimeler : <input type="text" name="keywords" class="login-username" autofocus="true"
+							placeholder="Anahtar kelimeleri virgülle ayırınız !!!"  />
 						<br>
-						<input type="submit" value="Kullanıcı Ekle" class="login-submit" />
+						Dönem : <input type="text" name="term" class="login-username" autofocus="true"
+							placeholder="Örnek : 2018-2019 Bahar"  />
+						<br>
+						<textarea name="type" style="visibility: hidden;"><%= type %></textarea>
+						<input type="submit" value="Pdf Ara" class="login-submit" />
 					</form>
+					<div>
+						<ul>
+							<% for(let i=0; i<results.length; i++) { %>
+								<li>
+									<%= results[i].project_name %>
+								</li>
+							<% } %>
+						</ul>
+						
+					</div>
 
 
 				</div>
