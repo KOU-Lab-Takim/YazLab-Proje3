@@ -2,31 +2,32 @@ KOCAELİ ÜNİVERSİTESİ
 MÜHENDİSLİK FAKÜLTESİ 
  
  
-BİLGİSAYAR MÜHENDİSLİĞİ BÖLÜMÜ 
+  BİLGİSAYAR MÜHENDİSLİĞİ BÖLÜMÜ 
  
  
  
-LİSANS TEZİ 
- 
- 
- 
- 
-aodfmaodspadfğpağpfpadğkfpğakdfpk
+YAPAY ZEKA
  
  
  
  
- 
- 
- 
-Ali 
+YAPAY ZEKA UYGULAMARIYLA YANGIN TESPİTİ
  
  
  
  
  
  
-KOCAELİ 2018 
+ 
+ 
+ALİ EKEN
+ 
+ 
+ 
+ 
+ 
+ 
+KOCAELİ 2020 
 ----------------Page (0) Break----------------
 KOCAELİ ÜNİVERSİTESİ  
 MÜHENDİSLİK FAKÜLTESİ 
@@ -34,21 +35,22 @@ MÜHENDİSLİK FAKÜLTESİ
 BİLGİSAYAR MÜHENDİSLİĞİ BÖLÜMÜ 
  
  
-BİTİRME PROJESİ 
+YAPAY ZEKA
  
-asdfsafdfasfsfdsa
+YAPAY ZEKA UYGULAMARIYLA YANGIN TESPİTİ
+ 
   
  
 ALİ EKEN 
  
-Prof.Dr. ssdasda Duru 
+Prof.Dr. Bahadır Işık
 Danışman, Kocaeli Üniv. ................................................ 
-Doç.Dr. Sevinç İLHAN OMURCA 
+Doç.Dr. Murat Karakurt
 Jüri Üyesi, Kocaeli Üniv.  ................................................ 
-Dr. Öğr. Üyesi Orhan AKBULUT 
+Dr. Öğr. Ahmet Burhan Bulut
 Jüri Üyesi, Kocaeli Üniv. ................................................ 
  
-Tezin Savunulduğu Tarih: 01.06.2022 
+Tezin Savunulduğu Tarih: 20.03.2018 / 2017-2018 Güz 
  
  
  
@@ -83,7 +85,7 @@ referans edilmiş ve dokümanda belirtilmiştir.
  
  
 Öğrenci No: 170201025 
-Adı Soyadı: YAvız 
+Adı Soyadı: Ali Eken
 Öğretim Türü: Örgün Öğretim 
  
  
@@ -269,31 +271,47 @@ SC :  Series Capacitor (Seri Kapasitör)
  
  
  
-İLETİM HATLARINDA EMPEDANS TABANLI ARIZA YERİ TESPİTİ İÇİN YENİ 
-BİR YAKLAŞIM  
+YAPAY ZEKA UYGULAMARIYLA YANGIN TESPİTİ
 ÖZET 
-Bu çalışmanın amacı, iletim hatlarında arıza yeri tespiti için empedansa dayalı algoritmaları 
-incelemek ve seri kompanze edilmiş hatlar için yeni bir algoritma geliştirmektir.  
-Öncelikle,  tek  yada  iki  baradan  alınan  ölçümleri  kullanarak  arıza  yerini  belirleyen  temel 
-algoritmalar tanımlanmıştır. Örnek test sistemleri üzerinde sistem ve arızaya ilişkin 
-parametreler değiştirilerek, temel arıza yeri algoritmalarından elde edilen sonuçlar 
-karşılaştırılmıştır. Sistem parametreleri hat modeli ve sistemin homojen olup olmama 
-durumlarını  kapsarken,  arızaya  ilişkin  parametreler  arıza  tipi,  konumu  ve  direnci  olarak 
-alınmıştır. 
-Seri kompanze edilmiş iletim hatlarında empedansa dayalı geliştirilmiş temel algoritmaların 
-yeterli olmadığı, bu duruma özel algoritmaların gerekliliği bir uygulama ile gösterilmiştir. Bu 
-özel  algoritmalar  incelenerek  kısaca  özetlenmiştir.  Buradan  hareketle,  iletim  hatlarında  seri 
-kompanzasyon durumunu dikkate alan performansa dayalı yeni bir arıza yeri tespiti algoritması 
-bu tez kapsamında geliştirilmiştir. 
-Geliştirilen bu algoritma, hat bilgileri ve iki baradan alınan ölçümleri kullanarak iteratif olarak 
-arıza  yerini  hesaplayan,  bütün  örneklerdeki  sonuçları  karşılaştırarak  minimum  hata  ile  bir 
-sonuca  ulaşan  bir  algoritmadır.  Önerilen  algoritma,  hem  temel  algoritmalar  hem  de  seri 
-kompanze  edilmiş  iletim  hatları  için  tasarlanmış,  iki  farklı  algoritma  türü  ile  çeşitli  test 
-sistemleri üzerinde denenmiş, alınan sonuçlar karşılaştırılmıştır. Test sistemleri DigSILENT 
-üzerinde  modellenmiş  ve  kısadevre  analizleri  yapılmış  olup,  bu  sistemden  alınan  akım  ve 
-gerilim bilgileri MATLAB ortamında kodlanan algoritmalar için kullanılmıştır. 
-Anahtar  kelimeler: Arıza  Yeri  Bulma  Algoritmaları,  İletim  Hatları,  MOV,  PMU,  Seri 
-Kapasitör. 
+"Yapay zekâ" kavramının geçmişi modern bilgisayar bilimi kadar eskidir. Fikir babası, "Makineler 
+düşünebilir mi?" sorunsalını ortaya atarak makine zekâsını tartışmaya açan Alan Mathison 
+Turing'dir. 1943'te II. Dünya Savaşı sırasında Kripto analizi gereksinimleri ile üretilen 
+elektromekanik cihazlar sayesinde bilgisayar bilimi ve yapay zekâ kavramları doğmuştur.
+Alan Turing, Nazilerin Enigma makinesinin şifre algoritmasını çözmeye çalışan matematikçilerin 
+en ünlü olanlarından biriydi. İngiltere, Bletchley Park'ta şifre çözme amacı ile başlatılan çalışmalar, 
+Turing'in prensiplerini oluşturduğu bilgisayar prototipleri olan Heath Robinson, Bombe Bilgisayarı 
+ve Colossus Bilgisayarları, Boole cebirine dayanan veri işleme mantığı ile Makine Zekâsı 
+kavramının oluşmasına sebep olmuştu.
+Modern bilgisayarın atası olan bu makineler ve programlama mantıkları aslında insan zekâsından 
+ilham almışlardı. Ancak sonraları, modern bilgisayarlarımız daha çok uzman sistemler 
+diyebileceğimiz programlar ile gündelik hayatımızın sorunlarını çözmeye yönelik kullanım 
+alanlarında daha çok yaygınlaştılar. 1970'li yıllarda büyük bilgisayar üreticileri olan Microsoft, 
+Apple, Xerox, IBM gibi şirketler kişisel bilgisayar (PC Personal Computer) modeli ile bilgisayarı 
+popüler hale getirdiler ve yaygınlaştırdılar. Yapay zekâ çalışmaları ise daha dar bir araştırma 
+çevresi tarafından geliştirilmeye devam etti.
+Bugün, bu çalışmaları teşvik etmek amacı ile Turing'in adıyla anılan Turing Testi ABD'de Loebner 
+ödülleri adı altında makine zekâsına sahip yazılımların üzerinde uygulanarak başarılı olan 
+yazılımlara ödüller dağıtılmaktadır.
+ 
+ 
+   .                
+              
+           
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Anahtar  Kelimeler:  Yapay Zeka, Görüntü İşleme, Derin Öğrenme, Veri Bilimi
  
   
 ----------------Page (9) Break----------------

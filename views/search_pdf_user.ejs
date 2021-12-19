@@ -23,7 +23,7 @@
 	<div class="wrapper">
 		<div class="container">
 			<div class="row">
-				<%- include("partials/control_panel") -%>
+				<%- include("partials/user_control_panel") -%>
 
 
 				<div class="span9">
@@ -47,7 +47,9 @@
 						<ul>
 							<% for(let i=0; i<results.length; i++) { %>
 								<li>
-									<%= results[i].project_name %>
+									<a href="/show_pdf_infos/<%= results[i]._id %>">
+										<%= results[i].project_name %>
+									</a>
 								</li>
 							<% } %>
 						</ul>

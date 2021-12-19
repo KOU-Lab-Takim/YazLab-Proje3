@@ -30,7 +30,7 @@
 					<form method="post" action="/file_upload_post_2">
                         <p> Öğrenci No : <%= infos.student_number%></p>
 						<p> Öğrenci İsmi : <%= infos.student_name%></p>
-                        <p> Öğretim Türü : <%= infos.term%></p>
+                        <p> Öğretim Türü : <%= infos.ogretim_turu%></p>
                         <p> Bölüm :  <%= infos.department%></p>
 						<p> Ders :  <%= infos.lesson%></p>
                         <p> Tez İsmi : <%= infos.project_name%></p>
@@ -56,6 +56,7 @@
                             <textarea type="hidden" name="abstract" ><%=infos.abstract %></textarea>
                             <textarea type="hidden" name="keywords" ><%=infos.keywords %></textarea>
 							<textarea type="hidden" name="project_name" ><%=infos.project_name %></textarea>
+							<textarea type="hidden" name="ogretim_turu" ><%=infos.ogretim_turu %></textarea>
                         </div>
 					</form>
 

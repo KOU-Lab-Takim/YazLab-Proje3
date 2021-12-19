@@ -12,6 +12,7 @@ exports.db_pdf_file = mongoose.model("pdf_file", new mongoose.Schema({
     path : String,
     student_name : String,
     student_number : String,
+    ogretim_turu : String,
     term : String,
     lesson : String,
     project_name : String,

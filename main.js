@@ -6,8 +6,8 @@ const fs = require("fs")
 const mongoose = require('mongoose');
 let PDFParser = require("pdf2json");
 let XMLHttpRequest = require('xhr2');
-const pdfParser = new PDFParser(this, 1);
-
+const pdfjsLib = require("pdfjs-dist")
+const path = require("path")
 // giriş yapan kullanıcın database deki ID si
 let LOGIN_ID = ""
 
@@ -19,13 +19,14 @@ app.set("view engine", "ejs")
 let MongoClient = require('mongodb').MongoClient;
 const { restart } = require('nodemon');
 const ObjectIdd =  require("mongodb").ObjectId
-let url2 = "mongodb+srv://admin:admin@cluster0.suejd.mongodb.net/proje3?retryWrites=true&w=majority"
-let url = "mongodb://localhost:27017/proje3?readPreference=primary&appname=MongoDB%20Compass&directConnection=true&ssl=false"
+let url = "mongodb+srv://admin:admin@cluster0.suejd.mongodb.net/proje3?retryWrites=true&w=majority"
+let url2 = "mongodb://localhost:27017/proje3?readPreference=primary&appname=MongoDB%20Compass&directConnection=true&ssl=false"
 const {db_user, db_pdf_file} = require("./schemas")
 
-let {extract_info_from_pdf} = require("./pdf_extraction")
+const req = require('express/lib/request');
 
 app.use(express.static("public"))
+app.use("/docs", express.static(path.join(__dirname, "docs")))
 app.use(express.urlencoded({
     extended: true
 }))
@@ -143,22 +144,23 @@ app.get("/file_upload", (req,res) => {
 
 // Pdf ten çıkarılan bilgileri veritabanına kaydet
 app.post("/file_upload_post_2", async(req,res) => {
-  console.log(req.body)
+  
   await db_pdf_file.create({
     user_id : LOGIN_ID,
-    path : String(req.body.path).trim().toUpperCase(),
-    student_name : req.body.student_name.trim().toUpperCase(),
-    student_number : req.body.student_number.trim().toUpperCase(),
-    term : req.body.term.trim().toUpperCase(),
-    lesson : req.body.lesson.trim().toUpperCase(),
-    abstract : String(req.body.abstract).trim().toUpperCase(),
-    date : req.body.date.trim().toUpperCase(),
-    keywords : req.body.keywords.trim().toUpperCase(),
-    advisor : req.body.advisor.trim().toUpperCase(),
-    jury1 : req.body.jury1.trim().toUpperCase(),
-    jury2 : req.body.jury2.trim().toUpperCase(),
-    department : req.body.department.trim().toUpperCase(),
-    project_name : req.body.project_name.trim().toUpperCase()
+    path : controlCharacters(req.body.path).trim(),
+    student_name : controlCharacters(req.body.student_name).trim().toUpperCase(),
+    student_number : controlCharacters(req.body.student_number).trim().toUpperCase(),
+    ogretim_turu : controlCharacters(req.body.ogretim_turu).trim().toUpperCase(),
+    term : controlCharacters(req.body.term).trim().toUpperCase(),
+    lesson : controlCharacters(req.body.lesson).trim().toUpperCase(),
+    abstract : controlCharacters(req.body.abstract).trim().toUpperCase(),
+    date : controlCharacters(req.body.date).trim().toUpperCase(),
+    keywords : controlCharacters(req.body.keywords).trim().toUpperCase(),
+    advisor : controlCharacters(req.body.advisor).trim().toUpperCase(),
+    jury1 : controlCharacters(req.body.jury1).trim().toUpperCase(),
+    jury2 : controlCharacters(req.body.jury2).trim().toUpperCase(),
+    department : controlCharacters(req.body.department).trim().toUpperCase(),
+    project_name : controlCharacters(req.body.project_name).trim().toUpperCase()
   })
   res.render("user_panel")
 })
@@ -166,20 +168,21 @@ app.post("/file_upload_post_2", async(req,res) => {
 // Verilen pdf teki bilgileri çıkar ve onaylama sayfasına yönlendir.
 app.post("/file_upload_post", async (req,res) => {
   let pdf = req.files.pdf
-  let dir = __dirname + "/public/pdf_files/" + pdf.name
+  let dir = "docs/" + pdf.name
 
   // pdf i public/pdf_files içine kaydet
-  pdf.mv(dir, async function(err){
+  pdf.mv(dir, function(err){
     
     
     let filename = dir.split("").splice(0, dir.length - 4).join("")
+    console.log("filename : " + filename)
     let infos = {}
-
+    const pdfParser = new PDFParser(this, 1);
     pdfParser.on("pdfParser_dataError", errData => console.error(errData.parserError));
     pdfParser.on("pdfParser_dataReady", pdfData => {
         fs.writeFile(filename + ".txt", pdfParser.getRawTextContent(), () => { console.log("Done."); });
     });
-
+    
     pdfParser.loadPDF(filename + ".pdf");
 
     // Belirli bir sayfa aralığını string olarak döndür.
@@ -231,9 +234,9 @@ app.post("/file_upload_post", async (req,res) => {
 
             // 4.sayfadan isim ve öğrenci no bilgileri çıkarıldı
             let text = readPage(arrayOfLines, 2, 3)
-            let ogrenciNo
-            let isim
-            let ogretimTuru
+            let ogrenciNo = ""
+            let isim = ""
+            let ogretimTuru = ""
 
             for (let i = 0; i < text.length; i++) {
                 let o = searchPattern(text[i], "Öğrenci No:")
@@ -252,26 +255,36 @@ app.post("/file_upload_post", async (req,res) => {
             infos["student_number"] = ogrenciNo
             infos["student_name"] = isim
             infos["term"] = ogretimTuru
+            infos["ogretim_turu"] = infos["student_number"].split("").splice(6, 1).join("") + ".Öğretim"
 
             // 2.sayfadan bölüm, tez ismi, danışman ismi,
             // Jüri isimleri ve tarih bilgileri çıkarıldı
             text = readPage(arrayOfLines, 0, 1)
-            let bolum
-            let tez_ismi
-            let danisman_isim
-            let juri1, juri2
-            let tarih
-
+            console.log(text)
+            let bolum = ""
+            let tez_ismi = ""
+            let danisman_isim = ""
+            let juri1 = ""
+            let juri2 = ""
+            let tarih = ""
+            let ek = 0
             bolum = text[3]
             let lesson = text[6]
             tez_ismi = text[8]
             if (text[9][0] != ' ') {
                 tez_ismi += text[9]
+                ek = 1
             }
-            danisman_isim = text[13]
-            juri1 = text[15]
-            juri2 = text[17]
-            tarih = text[20].split("").splice(24).join("")
+            for (let i = 10; i < text.length; i++) {
+              let o = searchPattern(text[i], "Danışman")
+              if (o[0] == true) {
+                danisman_isim = text[i-1]
+                juri1 = text[i+1]
+                juri2 = text[i+3]
+                tarih = text[i+6].split("").splice(24).join("")
+                break
+              }
+            }
             infos["department"] = bolum
             infos["project_name"] = tez_ismi
             infos["advisor"] = danisman_isim
@@ -283,17 +296,25 @@ app.post("/file_upload_post", async (req,res) => {
 
             // 10.sayfadan özet bilgileri ve anahtar kelimeler çıkarıldı.
             text = readPage(arrayOfLines, 8, 9)
+            console.log(text)
             let abstract = []
-            let keywords
+            let keywords = ""
             for (let i = 7; i < 27; i++) {
-                if (text[i][0] == " ")
+                if (text[i].trim().length == 0)
                     break
-                abstract.push(text[i])
+                abstract.push(text[i].trim())
             }
-            keywords = text[27].split("").splice(19).join("")
-            if (text[28][0] != " ")
-                keywords += text[28]
-           
+
+            for (let i = 10; i < text.length; i++) {
+              let o = searchPattern(text[i], "Anahtar  Kelimeler:")
+              if (o[0] == true) {
+                keywords = text[i].split("").splice(19).join("")
+                if (text[i+1][0] != " ")
+                    keywords += text[i+1]
+                break
+              }
+            }
+
             infos["abstract"] = abstract
             infos["keywords"] = keywords
             infos["path"] = dir
@@ -422,7 +443,20 @@ app.post("/search_pdf_post", async (req,res) => {
   
 })
 
-var server = app.listen(4000, function () {  
+app.get("/show_pdf_infos/:id", async (req,res) => {
+  let a = await db_pdf_file.findOne({_id : req.params.id})
+  let user = await db_user.findOne({_id : LOGIN_ID})
+
+  res.render("show_pdf_infos", {
+    infos : a,
+    user_type : user.type,
+    path : a.path
+  })
+})
+
+
+
+var server = app.listen(3000, function () {  
   var host = server.address().address;  
   var port = server.address().port;  
   console.log('Example app listening at http://%s:%s', host, port);  
